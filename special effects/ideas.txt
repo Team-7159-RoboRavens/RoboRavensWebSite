@@ -1,0 +1,106 @@
+-----------------------------------Code for Header----------------------------------------
+------HTML------
+
+<div id="header-placeholder"></div>
+
+
+------JS--------
+const headerplaceholder = document.getElementById('header-placeholder');
+
+headerplaceholder.innerHTML = `
+<header>
+  <nav class="topnav">
+    <ul>
+  <li><a href="index.html"><img class="logo" src="images/download.png" alt="Logo"></a></li>
+      <li class="dropdown">
+        <a>Departments</a>
+        <ul class="dropdown-menu">
+            <li><a href="strategy.html">Strategy</a></li>
+            <li><a href="outreach.html">Outreach</a></li>
+            <li><a href="mechanical.html">Mechanical</a></li>
+            <li><a href="controls.html">Controls</a></li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </nav>
+</header>
+`;
+
+-------CSS for header------
+header{
+    background-color: #333;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.topnav > ul{
+    list-style:none;
+    margin:0 auto;
+    padding:0;
+    display: flex;
+    gap:40px;
+    align-items:center;
+}
+.topnav a{
+    color: lightsalmon;
+    transition: color 0.3s;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+.topnav img{
+    width:50px;
+    height:50px;
+    border-radius:14px;
+}
+.topnav a:hover {
+    color: #f80d0d;
+    border-radius: 5px;
+}
+.topnav a .logo{
+    display: inline-block;
+    transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+    transform-origin: center center;
+}
+.topnav a:hover .logo,
+.topnav a:focus .logo{
+    transform: rotate(360deg);
+}
+
+
+
+-----------------------------CSS for dropdown menu--------------------------------
+
+.dropdown {
+    position: relative; 
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    background: #333;
+    border: 1px solid #555;
+    padding: 10px 0;
+    list-style: none;
+    min-width: 160px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: lightsalmon;
+    text-decoration: none;
+}
+.dropdown-menu li a:hover {
+    background: #444;
+    color: #f80d0d;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
