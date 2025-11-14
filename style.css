@@ -1,9 +1,127 @@
 body {
-    background-color:  red;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
 }
-head {
-    background-color: lightsalmon;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-weight: bold;
+
+
+
+header{
+    background-color: rgb(23, 23, 23);
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
+.topnav > ul{
+    list-style:none;
+    margin:0 auto;
+    padding:0;
+    display: flex;
+    gap:60px;
+    align-items:center;
+}
+.topnav a{
+    color: rgb(207, 203, 203);
+    transition: color 0.3s;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:50px;
+    font-size: 15px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+.topnav img{
+    width:70px;
+    height:70px;
+    border-radius:14px;
+}
+.topnav a:hover {
+    color: #f80d0d;
+    border-radius: 5px;
+}
+.topnav a .logo{
+    display: inline-block;
+    transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+    transform-origin: center center;
+}
+.topnav a:hover .logo,
+.topnav a:focus .logo{
+    transform: rotate(360deg);
+}
+
+.dropdown {
+    position: relative; 
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    background: #333;
+    border: 1px solid #555;
+    padding: 10px 0;
+    list-style: none;
+    min-width: 160px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+}
+.dropdown-menu li a:hover {
+    background: #444;
+    color: #f80d0d;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+
+
+footer {
+    background-color: #090000;
+    color: rgb(166, 8, 8);
+    text-align: center;
+    padding: 20px 0;
+    margin-top:0;
+    font-family:monospace;
+    font-size: 20px;
+    display: block;
+    align-items:center;
+    justify-content:center;
+    line-height: 2.5em;
+}
+.footer-content {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80%;
+    margin: 0 auto;
+}
+.footer-links{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
+.other-footer-links{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+footer a {
+    color: lightsalmon;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+.footer a:hover {
+    color: red;
+}
+
+
+
+
