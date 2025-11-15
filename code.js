@@ -42,3 +42,71 @@ footerPlaceholder.innerHTML = `
   <p>© 2025 by FTC Team 7159 Robo Ravens</p>
 </footer>
 `;
+
+
+async function animate(startColor, endColor, element, repititions, timeMS, deg1, deg2) {
+    let color = startColor;
+    let increment = [(endColor[0] - startColor[0]) / repititions,(endColor[1] - startColor[1]) / repititions, (endColor[2] - startColor[2]) / repititions];
+    let degree = deg1;
+    for (let i = 0; i < repititions; i++) {
+        // element.innerHTML = color;
+        // element.style.backgroundColor = "rgb(" + color[0] + ", " + color[1] + ", " + color[2] + ")";
+        element.style.backgroundImage = "linear-gradient(" + degree + "deg," + "rgb( " + color[0] + "," + color[1] + "," + color[2] + "), rgb(" + color[0] / 1.2 + "," + color[1] / 1.2+"," + color[2] / 1.2 + "))";
+        color = [color[0] + increment[0], color[1] + increment[1], color[2] + increment[2]];
+        await wait(timeMS / repititions);
+        degree += (deg2 - deg1) / repititions;
+    }
+}
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function typeEffect(Text, totalTime, element) {
+    let timePer = totalTime / Text.length;
+    text = "";
+    for (let i = 0; i <= Text.length; i++) {
+        element.innerHTML = text;
+        text = text + Text[i];
+        await wait(timePer);
+    }
+}
+
+function runAnimate() {
+    animate([255, 0, 0], [0, 240, 150], document.getElementById("headerDesc"), 1000, 5000, 0, 180);
+    typeEffect("This is what happens when you press a button and granny is unhappy, you don't want granny unhappy do you?", 5000, document.getElementById("Intro"));
+    // document.getElementById("headerDesc").innerHTML = "You Suck";
+}
+// animate([255, 0, 0], [0, 240, 150], document.getElementById("headerDesx"), 1000, 5000);
+// document.getElementById("body").innerHTML = "This is Javascript Working";
+// document.addEventListener("DOMContentLoaded", function() {
+//     // Your code to run after the DOM is ready
+//     animateBackground();
+//     console.log("DOM is fully loaded and parsed!");
+// });
+
+
+
+async function animateBackground(elementName) {
+  let rand = 100;
+  let rand2 = 100;
+  let ranDegree = Math.random() * 365 + 1;
+  console.log("Randegree1" + ranDegree);
+  let randList1 = [rand * (Math.random() + .5), rand * (Math.random() + .5), rand * (Math.random() + .5)]
+    background = document.getElementById(elementName);
+    while(rand < 256) {
+        console.log(rand);
+        rand = Math.random() * 150 + 52;
+        rand2 = Math.random() * 150 + 52;
+        console.log("Randegree" + ranDegree);
+        let ranDegree2 = Math.random() * 365;
+        let randList2 = [rand2 * (Math.random() + .5), rand2 * (Math.random() + .5), rand2 * (Math.random() + .5)];
+        await animate(randList1, randList2, background, 5000, 500, ranDegree, ranDegree2);
+        await wait(500);
+        ranDegree = Math.random * 365;
+        randList1 = [rand * (Math.random() + .5), rand * (Math.random() + .5), rand * (Math.random() + .5)];
+        await animate(randList2, randList1, background, 5000, 2500, ranDegree2, ranDegree);
+    }
+}
+
+animateBackground("body")
