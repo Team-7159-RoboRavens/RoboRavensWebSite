@@ -44,6 +44,18 @@ footerPlaceholder.innerHTML = `
 `;
 
 
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+        }
+    });
+}, {
+    threshold: 0.4  
+});
+
+document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
 async function animate(startColor, endColor, element, repititions, timeMS, deg1, deg2) {
     let color = startColor;
     let increment = [(endColor[0] - startColor[0]) / repititions,(endColor[1] - startColor[1]) / repititions, (endColor[2] - startColor[2]) / repititions];
