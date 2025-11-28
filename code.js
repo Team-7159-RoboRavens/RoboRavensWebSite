@@ -58,21 +58,44 @@ document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
 
 document.addEventListener("DOMContentLoaded", () => {
+  /* ----------------------------------------------------
+     PRELOAD IMAGES — prevents images not loading on fast scroll
+  ---------------------------------------------------- */
+  const preloadImages = (sources) => {
+    sources.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  };
+
+  // Add ALL your gallery images here:
+  preloadImages([
+    "images/homepageimg1.avif",
+    "images/logo.png"
+    // add more as you add more images
+  ]);
+
+  /* ----------------------------------------------------
+     SLIDER SETUP
+  ---------------------------------------------------- */
   const track = document.getElementById("gallery");
   const container = track.parentElement;
   let images = Array.from(track.querySelectorAll("img"));
 
-  // Clone first + last images for infinite looping
+  // Force immediate loading for safety
+  images.forEach(img => img.loading = "eager");
+
+  // Clone first + last images for loop
   const firstClone = images[0].cloneNode(true);
   const lastClone = images[images.length - 1].cloneNode(true);
 
   track.appendChild(firstClone);
   track.insertBefore(lastClone, images[0]);
 
-  // Update image list to include clones
   images = Array.from(track.querySelectorAll("img"));
 
-  let index = 1; // start on the “real” first image
+  let index = 1;
+  let isSliding = false; // prevents spam-click bugs
 
   function updateWidths() {
     const frameWidth = container.clientWidth;
@@ -89,7 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("load", updateWidths);
   updateWidths();
 
+  /* ----------------------------------------------------
+     SLIDE FUNCTION WITH SPAM-PROTECTION
+  ---------------------------------------------------- */
   function slideTo(i) {
+    if (isSliding) return; // prevents fast button spam from breaking gallery
+    isSliding = true;
+
     const frameWidth = container.clientWidth;
     index = i;
 
@@ -97,26 +126,32 @@ document.addEventListener("DOMContentLoaded", () => {
     track.style.transform = `translateX(${-frameWidth * index}px)`;
   }
 
-  // Handle loop jump after transition ends
+  /* ----------------------------------------------------
+     LOOP FIX AFTER TRANSITION
+  ---------------------------------------------------- */
   track.addEventListener("transitionend", () => {
     const frameWidth = container.clientWidth;
 
-    if (index === images.length - 1) { 
-      // we hit cloned first → jump to real first
+    // Jump from cloned first → real first
+    if (index === images.length - 1) {
       track.style.transition = "none";
       index = 1;
       track.style.transform = `translateX(${-frameWidth * index}px)`;
     }
 
+    // Jump from cloned last → real last
     if (index === 0) {
-      // we hit cloned last → jump to real last
       track.style.transition = "none";
       index = images.length - 2;
       track.style.transform = `translateX(${-frameWidth * index}px)`;
     }
+
+    isSliding = false; // allow next click
   });
 
-  // Buttons
+  /* ----------------------------------------------------
+     BUTTONS
+  ---------------------------------------------------- */
   document.getElementById("nextBtn").addEventListener("click", () => {
     slideTo(index + 1);
   });
@@ -125,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
     slideTo(index - 1);
   });
 });
-
 
 // async function animate(startColor, endColor, element, repititions, timeMS, deg1, deg2) {
 //     let color = startColor;
