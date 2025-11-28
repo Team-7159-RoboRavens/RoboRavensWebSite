@@ -5,6 +5,7 @@ body {
 .italic{
     font-style:italic;
 }
+/*Fade in effect
 /* Start invisible + squished from the left */
 .reveal {
   opacity: 0;
@@ -23,7 +24,7 @@ body {
     display:flex;
     flex-direction: row;
     justify-content:space-between;
-    height:120vh;
+    height:100vh;
     overflow:hidden;
     position:relative;
 }
@@ -73,14 +74,138 @@ body {
     content: "";
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: -50px;
+    left: -20px;
     width: 23%;
+    height: 100%;
+    bottom: 0;
     background: #820000;
     transform: skewX(-10deg);
     transform-origin: top left;
     z-index: 2;
 }
+
+
+
+#homesection2{
+    display:flex;
+    background:salmon;
+    margin-top:0;
+    padding-top:0;
+    flex-direction: row;
+    background: linear-gradient(
+       -80deg,          
+       black 0%,
+       black 51.2%,
+       #820000 51.2%,
+       #820000 100%
+    );
+}
+#homesection2-left{
+    display:flex;
+    width:50%;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+}
+#homesection2-right{
+    display:flex;
+    width:50%;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+}
+#homesection2-left p{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:white;
+    text-align:center;
+    font-size:20px;
+}
+#homesection2-right p{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:white;
+    text-align:center;
+    font-size:20px;
+}
+#homesection2-left h2{
+    color:black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:30px;
+}
+#homesection2-right h2{
+    color:red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:30px;
+}
+
+.gallery-container {
+  position: relative;
+  width: 550px;   /* adjust to fit your layout */
+  height: 400px;  /* controls gallery aspect ratio */
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  background: #111;
+  margin: 0 auto; /* centers it */
+}
+
+.gallery-track {
+  display: flex;
+  height: 100%;
+}
+
+.gallery-track img {
+  object-fit: cover;
+  height: 100%;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Navigation Buttons */
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+
+  width: 45px;
+  height: 45px;
+  border: none;
+  background: transparent; /* completely transparent background */
+  color: rgba(255, 255, 255, 0.5); /* semi-transparent arrow */
+  font-size: 80px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: color 0.25s ease; /* smooth color transition */
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  pointer-events: auto; /* ensures they are clickable */
+}
+
+.gallery-btn:hover {
+  color: white; /* arrow turns fully white on hover */
+}
+
+.gallery-btn.left  { left: 10px; }
+.gallery-btn.right { right: 10px; }
+
+.gallery-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 85px;
+
+  pointer-events: none;
+}
+
 
 
 header{
@@ -197,7 +322,39 @@ footer a {
 .footer a:hover {
     color: red;
 }
+#header-placeholder {
+    height: 93px; /* match real header height */
+}
 
+/* ---------- DEBUG VISUALS (temporary) ---------- */
+/* #homesection1 { outline: 2px solid lime; }
+#homesection2 { outline: 2px solid fuchsia; } */
 
+/* ---------- Stop margin-collapsing from first child ---------- */
+#homesection2 {
+  margin-top: 0;
+  /* one of these three prevents margin-collapse; pick one */
+  /* padding-top: 1px; */
+  overflow: hidden;
+  /* or: border-top: 1px solid transparent; */
+}
 
+/* Remove top margin from first visible child in section2 */
+#homesection2 > *:first-child { margin-top: 0 !important; }
 
+/* Hide empty or broken images so they don't create a tiny box */
+#homesection2 img[src=""],
+#homesection2 img:not([src]) {
+  display: none !important;
+}
+
+/* Make any remaining images behave nicely */
+#homesection2 img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* If you still want the header placeholder spacer, keep it explicit */
+/* #header-placeholder { height: 93px; } */
