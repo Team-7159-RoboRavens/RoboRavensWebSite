@@ -1,28 +1,45 @@
 const headerplaceholder = document.getElementById('header-placeholder');
 
 headerplaceholder.innerHTML = `
-<header>
+<header class="global-nav">
+  <div id="blur-overlay"></div>
   <nav class="topnav">
-    <ul>
-  <li><a href="index.html"><img class="logo" src="images/transp-logo.png" alt="Logo"></a></li>
-      <li class="dropdown">
-        <a>Departments</a>
-        <ul class="dropdown-menu">
-            <li><a href="strategy.html">Strategy</a></li>
-            <li><a href="outreach.html">Outreach</a></li>
-            <li><a href="mechanical.html">Mechanical</a></li>
-            <li><a href="controls.html">Controls</a></li>
-        </ul>
+    <ul class="nav-list">
+
+      <li class="nav-item">
+        <a href="index.html"><img class="logo" src="images/transp-logo.png" alt="Logo"></a>
       </li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="support.html">Support Us</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="prevrobots.html">Previous Robots</a></li>
-      <li><a href="timeline.html">Timeline</a></li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link">Departments</a>
+
+        <div class="mega-menu">
+          <div class="menu-container">
+
+            <div class="menu-column">
+              <h4 id="c">Learn About Our Departments</h4>
+              <a href="strategy.html">Strategy</a>
+              <a href="outreach.html">Outreach</a>
+              <a href="mechanical.html">Mechanical</a>
+              <a href="controls.html">Controls</a>
+            </div>
+
+          </div>
+        </div>
+      </li>
+
+      <li class="nav-item"><a href="portfolio.html">Portfolio</a></li>
+      <li class="nav-item"><a href="support.html">Support Us</a></li>
+      <li class="nav-item"><a href="contact.html">Contact</a></li>
+      <li class="nav-item"><a href="prevrobots.html">Previous Robots</a></li>
+      <li class="nav-item"><a href="timeline.html">Timeline</a></li>
+
     </ul>
   </nav>
 </header>
 `;
+
+
 
 const footerPlaceholder = document.getElementById('footer-placeholder');
 
@@ -56,109 +73,199 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+let slowed = false;
+
+const images = {}; // store loaded images
+const shapeNames = ["2gear", "3gear", "wrench"];
+
+
+// Preload images
+shapeNames.forEach(name => {
+    const img = new Image();
+    img.src = `particlefiles/${name}.png`;
+    images[name] = img;
+});
+
+// Resize canvas
+function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const ratio = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * ratio;
+    canvas.height = rect.height * ratio;
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+}
+resizeCanvas();
+window.addEventListener("resize", () => {
+    resizeCanvas();
+    initParticles();
+});
+window.addEventListener("load", () => {
+    resizeCanvas();
+    initParticles();
+});
+
+// Init particles
+function initParticles() {
+    particles = [];
+    const count = 8;
+    const rect = canvas.getBoundingClientRect();
+
+    for (let i = 0; i < count; i++) {
+        particles.push({
+            x: Math.random() * rect.width,
+            y: Math.random() * rect.height,
+            size: Math.random() * 20 + 10,  // bigger for visibility
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            rot: Math.random() * Math.PI * 2,
+            rotSpeed: (Math.random() - 0.5) * 0.02,
+            shape: shapeNames[Math.floor(Math.random() * shapeNames.length)]
+        });
+    }
+}
+
+// Draw a particle using SVG
+function drawParticle(p) {
+    const img = images[p.shape];
+    if (!img.complete) return; // wait for image to load
+
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+
+    // --- Step 4: apply dark gray filter ---
+    ctx.filter = "grayscale(100%) brightness(30%)"; // makes white icons dark gray
+
+    ctx.drawImage(img, -p.size/2, -p.size/2, p.size, p.size);
+
+    ctx.filter = "none"; // reset filter for next draw
+    ctx.restore();
+}
+
+// Animate
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const rect = canvas.getBoundingClientRect();
+    particles.forEach(p => {
+        p.x += slowed ? p.speedX * 0.25 : p.speedX;
+        p.y += slowed ? p.speedY * 0.25 : p.speedY;
+        p.rot += p.rotSpeed;
+
+        // Wrap edges
+        if (p.x < -p.size) p.x = rect.width + p.size;
+        if (p.x > rect.width + p.size) p.x = -p.size;
+        if (p.y < -p.size) p.y = rect.height + p.size;
+        if (p.y > rect.height + p.size) p.y = -p.size;
+
+        drawParticle(p);
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+
+// Hover slow
+const wrapper = document.querySelector(".particle-wrapper");
+wrapper.addEventListener("mouseenter", () => slowed = true);
+wrapper.addEventListener("mouseleave", () => slowed = false);
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
-  /* ----------------------------------------------------
-     PRELOAD IMAGES — prevents images not loading on fast scroll
-  ---------------------------------------------------- */
-  const preloadImages = (sources) => {
-    sources.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
-  };
 
-  // Add ALL your gallery images here:
-  preloadImages([
-    "images/homepageimg1.avif",
-    "images/logo.png"
-    // add more as you add more images
-  ]);
+  const track = document.getElementById("sliderTrack");
+  let slides = Array.from(track.children);
 
-  /* ----------------------------------------------------
-     SLIDER SETUP
-  ---------------------------------------------------- */
-  const track = document.getElementById("gallery");
-  const container = track.parentElement;
-  let images = Array.from(track.querySelectorAll("img"));
-
-  // Force immediate loading for safety
-  images.forEach(img => img.loading = "eager");
-
-  // Clone first + last images for loop
-  const firstClone = images[0].cloneNode(true);
-  const lastClone = images[images.length - 1].cloneNode(true);
+  // Clone first + last for infinite loop
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone  = slides[slides.length - 1].cloneNode(true);
 
   track.appendChild(firstClone);
-  track.insertBefore(lastClone, images[0]);
+  track.insertBefore(lastClone, slides[0]);
 
-  images = Array.from(track.querySelectorAll("img"));
+  slides = Array.from(track.children);
 
   let index = 1;
-  let isSliding = false; // prevents spam-click bugs
+  let locked = false;
 
-  function updateWidths() {
-    const frameWidth = container.clientWidth;
+  function update() {
+    const width = track.parentElement.clientWidth;
 
-    images.forEach(img => {
-      img.style.minWidth = frameWidth + "px";
-      img.style.width = frameWidth + "px";
+    slides.forEach(slide => {
+      slide.style.minWidth = width + "px";
     });
 
-    track.style.transform = `translateX(${-frameWidth * index}px)`;
+    track.style.transform = `translateX(${-width * index}px)`;
   }
 
-  window.addEventListener("resize", updateWidths);
-  window.addEventListener("load", updateWidths);
-  updateWidths();
+  window.addEventListener("resize", update);
+  window.addEventListener("load", update);
+  update();
 
-  /* ----------------------------------------------------
-     SLIDE FUNCTION WITH SPAM-PROTECTION
-  ---------------------------------------------------- */
-  function slideTo(i) {
-    if (isSliding) return; // prevents fast button spam from breaking gallery
-    isSliding = true;
+  /* Slide function */
+  function gotoSlide(i) {
+    if (locked) return;
+    locked = true;
 
-    const frameWidth = container.clientWidth;
     index = i;
+    const width = track.parentElement.clientWidth;
 
     track.style.transition = "transform 0.45s ease";
-    track.style.transform = `translateX(${-frameWidth * index}px)`;
+    track.style.transform = `translateX(${-width * index}px)`;
   }
 
-  /* ----------------------------------------------------
-     LOOP FIX AFTER TRANSITION
-  ---------------------------------------------------- */
+  /* Handle loop boundaries */
   track.addEventListener("transitionend", () => {
-    const frameWidth = container.clientWidth;
+    const width = track.parentElement.clientWidth;
 
-    // Jump from cloned first → real first
-    if (index === images.length - 1) {
+    if (index === slides.length - 1) {
       track.style.transition = "none";
       index = 1;
-      track.style.transform = `translateX(${-frameWidth * index}px)`;
+      track.style.transform = `translateX(${-width * index}px)`;
     }
 
-    // Jump from cloned last → real last
     if (index === 0) {
       track.style.transition = "none";
-      index = images.length - 2;
-      track.style.transform = `translateX(${-frameWidth * index}px)`;
+      index = slides.length - 2;
+      track.style.transform = `translateX(${-width * index}px)`;
     }
 
-    isSliding = false; // allow next click
+    locked = false;
   });
 
-  /* ----------------------------------------------------
-     BUTTONS
-  ---------------------------------------------------- */
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    slideTo(index + 1);
+  /* Buttons */
+  document.getElementById("sliderNext").addEventListener("click", () => {
+    gotoSlide(index + 1);
   });
 
-  document.getElementById("backBtn").addEventListener("click", () => {
-    slideTo(index - 1);
+  document.getElementById("sliderPrev").addEventListener("click", () => {
+    gotoSlide(index - 1);
   });
+
+});
+
+// --- Dropdown Blur Logic (Apple-style) ---
+
+const dropdown = document.querySelector('.dropdown');
+const overlay = document.getElementById('blur-overlay');
+
+dropdown.addEventListener('mouseenter', () => {
+    overlay.classList.add('active');
+});
+
+dropdown.addEventListener('mouseleave', () => {
+    overlay.classList.remove('active');
+});
+
+// Close blur if user clicks the overlay (optional but nice)
+overlay.addEventListener('click', () => {
+    overlay.classList.remove('active');
 });
 
 // async function animate(startColor, endColor, element, repititions, timeMS, deg1, deg2) {

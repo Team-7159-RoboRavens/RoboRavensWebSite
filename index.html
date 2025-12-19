@@ -1,48 +1,111 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="favicon.png"/>
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-  </head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+</head>
 
 
-  <body id="body">
-    <div id="header-placeholder"></div>
-    <div id="homesection1">
-      <div id="homesection1-left">
-        <div id="homesection1-left-text">
-          <h1 class="reveal">A FIRST® Tech Challenge Team Focused On Inspiration</h1>
-          <p class="reveal">FTC Team 7159, the Robo Ravens, is based in San Diego, California. Founded in 2014, Robo Ravens is the official <span class="italic">FIRST® Tech Challenge</span> team of Canyon Crest Academy. Open to all middle and high school students, our team has inspired hundreds to pursue STEM. With an award-winning outreach team, we are determined to foster the next generation of scientists and engineers.</p>
-        </div>
-      </div>
-
-      <div id="homesection1-right">
-        <img src="images/homepageimg1.avif" alt="hi">
+<body id="body">
+  <div id="header-placeholder"></div>
+  <div id="homesection1">
+    <div id="homesection1-left">
+      <div id="homesection1-left-text">
+        <h1 class="reveal">A FIRST® Tech Challenge Team Focused On Inspiration</h1>
+        <p class="reveal">FTC Team 7159, the Robo Ravens, is based in San Diego, California. Founded in 2014, Robo
+          Ravens is the official <span class="italic">FIRST® Tech Challenge</span> team of Canyon Crest Academy. Open to
+          all middle and high school students, our team has inspired hundreds to pursue STEM. With an award-winning
+          outreach team, we are determined to foster the next generation of scientists and engineers.</p>
       </div>
     </div>
-    <div id="homesection2">
-      <div id="homesection2-left">
-        <h2>Upcoming Events</h2>
-        <p>Join us on our upcoming community events to assist us, join the team, or talk with us if you want to collaborate.</p>
-      </div>
-      <div id="homesection2-right">
-        <h2>Spotlight</h2>
-        <p>Check out our highlights and achievements from the past month!</p>
-        <div class="gallery-container">
-          <button class="gallery-btn left" id="backBtn">‹</button>
-          <div class="gallery-track" id="gallery">
-            <img src="images/homepageimg1.avif" alt="">
-            <img src="images/logo.png" alt="">
+    <div id="homesection1-right">
+      <img src="images/homepageimg1.avif" alt="hi">
+    </div>
+  </div>
+  <div id="homesection2">
+    <div id="homesection2-left">
+      <h2>Upcoming Events</h2>
+      <p>Join us on our upcoming community events to assist us, join the team, or talk with us if you want to
+        collaborate.</p>
+    </div>
+    <div id="homesection2-right">
+      <h2>Spotlight</h2>
+      <p>Check out our highlights and achievements from the past month!</p>
+      <div class="slider">
+        <button class="slider__btn slider__btn--left" id="sliderPrev">‹</button>
+        <button class="slider__btn slider__btn--right" id="sliderNext">›</button>
+        <div class="slider__viewport">
+          <div class="slider__track" id="sliderTrack">
+            <div class="slider__slide">
+              <img src="images/homepageimg1.avif" alt="">
+              <div class="slider__caption">Hi</div>
+            </div>
+            <div class="slider__slide">
+              <img src="images/IMG_6262.jpg" alt="">
+              <div class="slider__caption">Playing Clash</div>
+            </div>
           </div>
-          <button class="gallery-btn right" id="nextBtn">›</button>
         </div>
       </div>
     </div>
-    <div id="footer-placeholder"></div>
-  </body>
-  <script src="code.js" defer></script>
+  </div>
+  <div id="homesection3">
+
+    <div id="homesection3-left">
+      <div class="particle-wrapper">
+        <canvas id="particles"></canvas>
+      </div>
+
+      <h2>Meet Taya</h2>
+      <p>
+        Taya is an FTC Robot built by Team 7159. It is designed for success in FIRST® Tech Challenge's
+        Into the Deep season and can reach heights of about 4 feet using its linear slides. It is a
+        powerful, agile robot capable of performing a variety of tasks. Taya is a reliable and sturdy
+        robot that is perfect for our team participating in the FTC Into the Deep season.
+      </p>
+
+      <button class="split-btn">
+        <span>Read More</span>
+        <div class="icon-box">→</div>
+      </button>
+    </div>
+
+    <div id="homesection3-right">
+      <!-- robot image later -->
+    </div>
+
+  </div>
+  <div id="homesection4">
+     <section class="sponsors">
+        <div class="fade-in">
+            <h2>INDUSTRY</h2>
+            <h3>CORPORATE SPONSORSHIPS</h3>
+            <p>
+                We deeply thank our corporate sponsors: Amazon, Canyon Crest Academy Foundation,
+                and Canyon Crest Academy ASB, for their gracious donations to help keep the team free
+                of charge. Please contact us if you wish to sponsor our team.
+            </p>
+        </div>
+
+        <div class="sponsor-logos fade-in">
+            <img src="https://static.wixstatic.com/media/b4ca00_a477bda128d24e2eb22ecb5747771fdc~mv2.png/v1/fill/w_285,h_86,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/b4ca00_a477bda128d24e2eb22ecb5747771fdc~mv2.png"
+                 alt="Amazon" class="sponsor-logo">
+
+            <img src="https://static.wixstatic.com/media/b4ca00_1a8aa1ed2cd54b89b09446edba56398b~mv2.png/v1/fill/w_358,h_81,al_c,q_85,enc_avif,quality_auto/b4ca00_1a8aa1ed2cd54b89b09446edba56398b~mv2.png"
+                 alt="CCA Foundation" class="sponsor-logo">
+
+            <img src="https://static.wixstatic.com/media/b4ca00_88f5603a7cce4509bf708d92d42ab796~mv2.png/v1/fill/w_219,h_219,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/b4ca00_88f5603a7cce4509bf708d92d42ab796~mv2.png"
+                 alt="CCA ASB" class="sponsor-logo">
+        </div>
+    </section>
+  </div>
+  <div id="footer-placeholder"></div>
+</body>
+<script src="code.js" defer></script>
+
 </html>

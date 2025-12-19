@@ -2,74 +2,120 @@ body {
     margin: 0;
     padding: 0;
 }
-.italic{
-    font-style:italic;
+
+.italic {
+    font-style: italic;
+}
+
+#c{
+    font-size:15px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 /*Fade in effect
 /* Start invisible + squished from the left */
 .reveal {
-  opacity: 0;
-  transform: scale(0.6);   /* Start smaller */
-  transform-origin: center center; /* Grow from center */
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    opacity: 0;
+    transform: scale(0.6);
+    /* Start smaller */
+    transform-origin: center center;
+    /* Grow from center */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
+
 .reveal.active {
-  opacity: 1;
-  transform: scale(1);
+    opacity: 1;
+    transform: scale(1);
 }
 
 
-
-#homesection1{
-    display:flex;
-    flex-direction: row;
-    justify-content:space-between;
-    height:100vh;
-    overflow:hidden;
-    position:relative;
-}
-#homesection1-left{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    width:50%;
-    z-index:10;
-    background:#820000;
-    position:relative;
-    z-index:3;
-    background: linear-gradient(
-       75deg,          
-       black 0%,
-       black 49%,
-       #820000 49%,
-       #820000 100%
-    );
-}
-#homesection1-right{
-    width:50%;
-    position:relative;
-}
-#homesection1-left h1{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size:60px;
-    color:white;
-    padding-left:30px;
-}
-#homesection1-left p{
-    color:white;
-    font-size:21px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding:30px;
-}
-#homesection1-right img{
+/* PARTICLE LAYER */
+.particle-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit:cover;
-    position:relative;
-    object-position:70% 40%;
-    z-index:1;
+
+    overflow: hidden;
+    z-index: 0;
+
+    /* MUST allow mousemove so hover works */
+    pointer-events: auto;
 }
+
+/* CANVAS */
+.particle-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    /* must receive pointer events */
+    pointer-events: auto;
+}
+canvas img.gray {
+    filter: brightness(0.6) grayscale(100%);
+}
+
+
+
+
+#homesection1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100vh;
+    position: relative;
+}
+
+#homesection1-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    z-index: 10;
+    background: #820000;
+    position: relative;
+    z-index: 3;
+    background: linear-gradient(75deg,
+            black 0%,
+            black 49%,
+            #820000 49%,
+            #820000 100%);
+}
+
+#homesection1-right {
+    width: 50%;
+    position: relative;
+}
+
+#homesection1-left h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 60px;
+    color: white;
+    padding-left: 30px;
+}
+
+#homesection1-left p {
+    color: white;
+    font-size: 21px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 30px;
+}
+
+#homesection1-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    object-position: 70% 40%;
+    z-index: 1;
+}
+
 #homesection1-right::before {
     content: "";
     position: absolute;
@@ -86,198 +132,412 @@ body {
 
 
 
-#homesection2{
-    display:flex;
-    background:salmon;
-    margin-top:0;
-    padding-top:0;
+#homesection2 {
+    display: flex;
+    background: salmon;
+    margin-top: 0;
+    padding-top: 0;
     flex-direction: row;
-    background: linear-gradient(
-       -80deg,          
-       black 0%,
-       black 51.2%,
-       #820000 51.2%,
-       #820000 100%
-    );
+    background: linear-gradient(90deg,
+            white 0%,
+            white 51.2%,
+            white 51.2%,
+            white 100%);
 }
-#homesection2-left{
-    display:flex;
-    width:50%;
-    flex-direction:column;
-    align-items:center;
-    padding:20px;
+
+#homesection2-left {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
-#homesection2-right{
-    display:flex;
-    width:50%;
-    flex-direction:column;
-    align-items:center;
-    padding:20px;
+
+#homesection2-right {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
-#homesection2-left p{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:white;
-    text-align:center;
-    font-size:20px;
+
+#homesection2-left p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    text-align: center;
+    font-size: 20px;
 }
-#homesection2-right p{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color:white;
-    text-align:center;
-    font-size:20px;
+
+#homesection2-right p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    text-align: center;
+    font-size: 20px;
 }
-#homesection2-left h2{
-    color:black;
+
+#homesection2-left h2 {
+    color: black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size:30px;
+    font-size: 30px;
 }
-#homesection2-right h2{
+
+#homesection2-right h2 {
+    color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+
+
+
+.slider {
+    position: relative;
+    width: 550px;
+    aspect-ratio: 11 / 8;
+    margin: 0 auto;
+    overflow: hidden;
+    background: white;
+}
+
+.slider__viewport {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider__track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.45s ease;
+}
+
+.slider__slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.slider__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px;
+    text-align: left;
+    font-size: 18px;
+    color: white;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.slider__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 80px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+    transition: color .25s ease;
+}
+
+.slider__btn:hover {
+    color: white;
+}
+
+.slider__btn--left {
+    left: 10px;
+}
+
+.slider__btn--right {
+    right: 10px;
+}
+
+.slider__slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slider__slide img {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #111;
+}
+
+
+/* SECTION 3 LAYOUT */
+#homesection3 {
+    display: flex;
+    background: salmon;
+
+    /* FIX: allow full height + allow grow */
+    min-height: 90vh;
+    height: auto;
+}
+
+/* LEFT SIDE — particles + text */
+#homesection3-left {
+    position: relative;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+    background: black;
+    color: white;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    /* FIX: Do NOT clip the canvas */
+    overflow: visible;
+}
+#homesection3-right {
+    background: url(images/IMG_6262.jpg) no-repeat center center;
+    background-size: cover;
+    flex: 1;           /* fills half of the flex container */
+    max-height: 90vh;  /* scales with viewport */
+}
+#homesection3-left h2{
     color:red;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size:30px;
 }
-
-.gallery-container {
-  position: relative;
-  width: 550px;   /* adjust to fit your layout */
-  height: 400px;  /* controls gallery aspect ratio */
-  overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-  background: #111;
-  margin: 0 auto; /* centers it */
+#homesection3-left p{
+    color:white;
+    font-size:20px;
+    width:60%;
+    text-align:center;
+    margin: 0 auto;
+    line-height: 7vh;
 }
-
-.gallery-track {
-  display: flex;
-  height: 100%;
-}
-
-.gallery-track img {
-  object-fit: cover;
-  height: 100%;
-  user-select: none;
-  pointer-events: auto;
-}
-
-.gallery-track::-webkit-scrollbar {
-  display: none;
-}
-
-/* Navigation Buttons */
-.gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-
-  width: 45px;
-  height: 45px;
-  border: none;
-  background: transparent; /* completely transparent background */
-  color: rgba(255, 255, 255, 0.5); /* semi-transparent arrow */
-  font-size: 80px;
+.split-btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: transparent;
+  color: white;
+  font-size: 14px;
+  padding: 9px 15px;
   cursor: pointer;
+  transition: 0.3s;
+  overflow: hidden;
+  margin-top:1.5rem;
+}
 
+.split-btn span {
+  padding-right: 20px;
+}
+
+.icon-box {
+  border-left: 1px solid white;
+  padding: 10px 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: color 0.25s ease; /* smooth color transition */
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-  pointer-events: auto; /* ensures they are clickable */
 }
 
-.gallery-btn:hover {
-  color: white; /* arrow turns fully white on hover */
+.split-btn:hover {
+  background: white;
+  color: black;
 }
 
-.gallery-btn.left  { left: 10px; }
-.gallery-btn.right { right: 10px; }
-
-.gallery-container::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-
-  width: 100%;
-  height: 85px;
-
-  pointer-events: none;
+#homesection3-left h2,
+#homesection3-left p,
+#homesection3-left .split-btn {
+    position: relative; /* needed to respect z-index */
+    z-index: 2;         /* higher than particles (1) */
 }
 
 
 
-header{
+
+header {
     background-color: rgb(23, 23, 23);
     padding: 15px 20px;
     position: fixed;
     top: 0;
     z-index: 1000;
-    width:100%;
+    width: 100%;
 }
-.topnav > ul{
-    list-style:none;
-    margin:0 auto;
-    padding:0;
+
+.topnav > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 25px;   /* <-- controls how far from the left you want it */
     display: flex;
-    gap:60px;
-    align-items:center;
+    gap: 60px;
+    align-items: center;
 }
-.topnav a{
+
+.topnav a {
     color: rgb(207, 203, 203);
     transition: color 0.3s;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight:50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 50px;
     font-size: 15px;
     text-decoration: none;
     letter-spacing: 0.5px;
 }
-.topnav img{
-    width:63px;
-    height:63px;
-    border-radius:14px;
+
+.topnav img {
+    width: 63px;
+    height: 63px;
+    border-radius: 14px;
 }
+
 .topnav a:hover {
     color: #f80d0d;
     border-radius: 5px;
 }
-.topnav a .logo{
+
+.topnav a .logo {
     display: inline-block;
-    transition: transform 600ms cubic-bezier(.2,.8,.2,1);
+    transition: transform 600ms cubic-bezier(.2, .8, .2, 1);
     transform-origin: center center;
 }
+
 .topnav a:hover .logo,
-.topnav a:focus .logo{
+.topnav a:focus .logo {
     transform: rotate(360deg);
 }
 
+.logo {
+    width: 63px;
+    height: 63px;
+    border-radius: 14px;
+    transition: transform .6s cubic-bezier(.2, .8, .2, 1);
+}
+
+.nav-item:hover .logo {
+    transform: rotate(360deg);
+}
+
+/* ================================
+   MEGA MENU (Apple-style)
+==================================*/
+
 .dropdown {
-    position: relative; 
+    position: relative;
 }
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%; 
-    background:rgb(23, 23, 23);
-    padding: 10px 0;
-    list-style: none;
-    min-width: 160px;
-    border-radius: 8px;
+
+.mega-menu {
+    position: fixed;
+    left: 0;
+    top: 75px;
+    width: 100%;
+    background: rgb(23, 23, 23);
+    padding: 35px 0;
+    border-bottom: 1px solid #2e2e2e;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition:
+        opacity .25s ease,
+        transform .25s ease,
+        visibility 0s linear .25s;
 }
-.dropdown-menu li a {
-    display: block;
-    padding: 10px 20px;
+
+.dropdown:hover .mega-menu,
+.mega-menu:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0s;
+}
+
+.menu-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 80px;
+}
+
+.menu-column h4 {
     color: white;
-    text-decoration: none;
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 500;
 }
-.dropdown-menu li a:hover {
-    background: #444;
-    color: #f80d0d;
-}
-.dropdown:hover .dropdown-menu {
+
+.menu-column a {
     display: block;
+    color: rgb(200, 200, 200);
+    padding: 6px 0;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color .2s ease;
 }
+
+.menu-column a:hover {
+    color: red;
+}
+
+/* Fix flicker: allow hover bridge */
+.dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 110%;
+    height: 25px;
+}
+/* Overlay that blurs the page under the mega menu */
+#blur-overlay {
+  position: fixed;
+  top: 75px;                          /* start below header (same as your mega menu) */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 75px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* safari */
+  background: rgba(0,0,0,0.15);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility 0s linear .25s;
+  pointer-events: none;               /* allow clicks to pass through when hidden */
+
+  /* LAYERING:
+     header is z-index:1000 in your CSS.
+     We want the overlay to cover page content but not the header.
+     We also want the mega-menu to be above the overlay.
+  */
+  z-index: 900; /* below header (1000) and below .mega-menu (set below) */
+}
+
+/* when JS toggles .active, show the blur and accept clicks */
+#blur-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+  pointer-events: auto;   /* allow clicking overlay to close it (your JS does that) */
+}
+
+/* ensure the mega-menu sits above the overlay */
+.mega-menu {
+  z-index: 1100; /* above overlay and above most page content */
+}
+
+/* optional: if you want the header to remain above everything (including menu),
+   keep header z-index:1000, otherwise raise header if needed */
+header { z-index: 1000; }
 
 
 
@@ -286,44 +546,51 @@ footer {
     color: rgb(166, 8, 8);
     text-align: center;
     padding: 20px 0;
-    margin-top:0;
-    font-family:monospace;
+    margin-top: 0;
+    font-family: monospace;
     font-size: 20px;
     display: block;
-    align-items:center;
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
     line-height: 2.5em;
 }
+
 .footer-content {
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 80%;
     margin: 0 auto;
 }
-.footer-links{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content:center;
-}
-.other-footer-links{
-    display:flex;
+
+.footer-links {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
+.other-footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 footer a {
     color: lightsalmon;
     text-decoration: none;
     margin: 0 10px;
     transition: color 0.3s;
 }
+
 .footer a:hover {
     color: red;
 }
+
 #header-placeholder {
-    height: 93px; /* match real header height */
+    height: 93px;
+    /* match real header height */
 }
 
 /* ---------- DEBUG VISUALS (temporary) ---------- */
@@ -332,29 +599,87 @@ footer a {
 
 /* ---------- Stop margin-collapsing from first child ---------- */
 #homesection2 {
-  margin-top: 0;
-  /* one of these three prevents margin-collapse; pick one */
-  /* padding-top: 1px; */
-  overflow: hidden;
-  /* or: border-top: 1px solid transparent; */
+    margin-top: 0;
+    /* one of these three prevents margin-collapse; pick one */
+    /* padding-top: 1px; */
+    overflow: hidden;
+    /* or: border-top: 1px solid transparent; */
 }
 
 /* Remove top margin from first visible child in section2 */
-#homesection2 > *:first-child { margin-top: 0 !important; }
+#homesection2>*:first-child {
+    margin-top: 0 !important;
+}
 
 /* Hide empty or broken images so they don't create a tiny box */
 #homesection2 img[src=""],
 #homesection2 img:not([src]) {
-  display: none !important;
+    display: none !important;
 }
 
 /* Make any remaining images behave nicely */
 #homesection2 img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 /* If you still want the header placeholder spacer, keep it explicit */
 /* #header-placeholder { height: 93px; } */
+
+.sponsors {
+    background: #fafafa;
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.sponsors h2 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #7a7a7a;
+    margin-bottom: 15px;
+}
+
+.sponsors h3 {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.sponsors p {
+    max-width: 750px;
+    margin: 0 auto 50px;
+    color: #5a5a5a;
+    line-height: 1.8;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.sponsor-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.sponsor-logo {
+    max-height: 70px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.6;
+    transition: all 0.3s;
+    filter: grayscale(100%);
+}
+
+.sponsor-logo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+}
